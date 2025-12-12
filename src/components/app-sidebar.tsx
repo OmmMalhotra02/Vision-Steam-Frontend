@@ -1,187 +1,74 @@
-import * as React from "react"
+import React from 'react'
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-  SidebarTrigger
-} from "@/components/ui/sidebar"
-
-// This is sample data.
 const data = {
-  // versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
       title: "Getting Started",
       url: "#",
       items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
+        { title: "Installation", url: "#" },
+        { title: "Project Structure", url: "#" },
       ],
     },
     {
       title: "Building Your Application",
       url: "#",
       items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
+        { title: "Routing", url: "#" },
+        { title: "Data Fetching", url: "#", isActive: true },
+        { title: "Rendering", url: "#" },
+        { title: "Caching", url: "#" },
+        { title: "Styling", url: "#" },
+        { title: "Optimizing", url: "#" },
+        { title: "Configuring", url: "#" },
+        { title: "Testing", url: "#" },
+        { title: "Authentication", url: "#" },
+        { title: "Deploying", url: "#" },
+        { title: "Upgrading", url: "#" },
+        { title: "Examples", url: "#" },
       ],
     },
     {
       title: "API Reference",
       url: "#",
       items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
+        { title: "Components", url: "#" },
+        { title: "File Conventions", url: "#" },
+        { title: "Functions", url: "#" },
+        { title: "next.config.js Options", url: "#" },
+        { title: "CLI", url: "#" },
+        { title: "Edge Runtime", url: "#" },
       ],
     },
     {
       title: "Architecture",
       url: "#",
       items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
+        { title: "Accessibility", url: "#" },
+        { title: "Fast Refresh", url: "#" },
+        { title: "Next.js Compiler", url: "#" },
+        { title: "Supported Browsers", url: "#" },
+        { title: "Turbopack", url: "#" },
       ],
     },
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar() {
   return (
-    <Sidebar {...props}>
-      <SidebarHeader className="">
-        {/* <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        <SearchForm /> */}
-        <div className="flex flex-row w-60 gap-10">
-          <div className='flex gap-10'>
-            <SidebarTrigger className="w-10 h-10" />
-            <img src="logo.png" alt="logo" className='w-35' />
-          </div>
+    <div className="flex flex-col p-4 gap-4">
+      {data.navMain.map((group) => (
+        <div key={group.title}>
+          <h3 className="font-bold mb-2">{group.title}</h3>
+          <ul className="ml-4 flex flex-col gap-1">
+            {group.items.map((item) => (
+              <li key={item.title} className={item.isActive ? 'font-bold' : ''}>
+                <a href={item.url}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
         </div>
-      </SidebarHeader>
-      <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
+      ))}
+    </div>
   )
 }

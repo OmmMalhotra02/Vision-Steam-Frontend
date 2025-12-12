@@ -58,9 +58,9 @@ export function LoginForm({
       const { user } = response.data.data
 
       dispatch(login({ user }))
+      dispatch(setShowLoginPage(false))
+      navigate("/")
       console.log(response.data?.message);
-      
-      navigate("/");  
 
     } catch (error) {
       console.error("API request error", error.response?.data?.message || error.message)
