@@ -37,6 +37,7 @@ function App() {
         {videos.map((video: any) => (
           <VideoCard
             key={video._id}
+            videoId={video._id}
             thumbnail={video.thumbnail}
             title={video.title}
             channel={video.ownerUser.username}

@@ -7,12 +7,14 @@ import { createBrowserRouter, createRoutesFromElements, Route } from "react-rout
 import Layout from './Layout'
 import App from './App'
 import Login from './pages/Login'
+import VideoPage from './pages/VideoPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<App />} />
       <Route path='login' element={<Login />} />
+      <Route path='/video/:videoId' element={<VideoPage />} />
     </Route>
   )
 )
