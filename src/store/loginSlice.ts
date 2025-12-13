@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     status: localStorage.getItem('loginStatus') === 'true' || false,
-    userData: null,
+    userData: localStorage.getItem('userData')
+        ? JSON.parse(localStorage.getItem('userData')!)
+        : null, 
     showLoginPage: false
 }
 
@@ -13,15 +15,18 @@ export const loginDetailsSlice = createSlice({
         // by default below properties have access to state (current state) and action (values required to perform operation)
         login: (state, action) => {
             state.status = true;
-            localStorage.setItem('loginStatus', 'true')
-            state.userData = action.payload.user; 
+            state.userData = action.payload.user;
             state.showLoginPage = false;
+
+            localStorage.setItem('loginStatus', 'true');
+            localStorage.setItem('userData', JSON.stringify(action.payload.user));
         },
 
         logout: (state) => {
             state.status = false;
-            localStorage.setItem('loginStatus', 'false')
             state.userData = null;
+            localStorage.setItem('loginStatus', 'false');
+            localStorage.removeItem('userData');
         },
 
         setShowLoginPage: (state, action) => {
@@ -30,6 +35,6 @@ export const loginDetailsSlice = createSlice({
     }
 })
 
-export const {login, logout, setShowLoginPage} = loginDetailsSlice.actions
+export const { login, logout, setShowLoginPage } = loginDetailsSlice.actions
 
 export default loginDetailsSlice.reducer

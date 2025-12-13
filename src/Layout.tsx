@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from './components/Header'
 import { Link, Outlet } from 'react-router-dom'
 import { AppSidebar } from '@/components/app-sidebar'
+import { Toaster } from "@/components/ui/sonner"
 
 function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -42,6 +43,14 @@ function Layout() {
         >
           <Outlet />
         </main>
+        <Toaster
+          position="top-center"
+          richColors
+          closeButton
+          toastOptions={{
+            className: "h-10 rounded-lg shadow-md",
+          }}
+        />
       </div>
     </div>
   )
