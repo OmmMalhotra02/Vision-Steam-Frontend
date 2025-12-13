@@ -116,7 +116,8 @@ function VideoPage() {
             }
         } catch (error) {
             console.error(error)
-            toast.error("Something went wrong")
+            const serverMessage = error.response?.data?.message
+            serverMessage ? toast.error(serverMessage) : toast.error("Something went wrong")
         }
     }
 

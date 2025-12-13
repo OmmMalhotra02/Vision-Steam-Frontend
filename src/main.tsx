@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import VideoPage from './pages/VideoPage'
 import SignUp from './pages/SignUp'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import VideoUpload from './pages/VideoUpload'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,9 +18,14 @@ const router = createBrowserRouter(
       <Route index element={<App />} />
       <Route path='login' element={<Login />} />
       <Route path='signup' element={<SignUp />} />
-      <Route path='video/:videoId' element={<ProtectedRoute>
-        <VideoPage />
-      </ProtectedRoute>} />
+      <Route path='video/:videoId' element={
+        <ProtectedRoute>
+          <VideoPage />
+        </ProtectedRoute>} />
+      <Route path='upload' element={
+        <ProtectedRoute>
+          <VideoUpload />
+        </ProtectedRoute>} />
     </Route>
   )
 )

@@ -1,69 +1,55 @@
 import React from 'react'
-
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        { title: "Installation", url: "#" },
-        { title: "Project Structure", url: "#" },
-      ],
-    },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        { title: "Routing", url: "#" },
-        { title: "Data Fetching", url: "#", isActive: true },
-        { title: "Rendering", url: "#" },
-        { title: "Caching", url: "#" },
-        { title: "Styling", url: "#" },
-        { title: "Optimizing", url: "#" },
-        { title: "Configuring", url: "#" },
-        { title: "Testing", url: "#" },
-        { title: "Authentication", url: "#" },
-        { title: "Deploying", url: "#" },
-        { title: "Upgrading", url: "#" },
-        { title: "Examples", url: "#" },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        { title: "Components", url: "#" },
-        { title: "File Conventions", url: "#" },
-        { title: "Functions", url: "#" },
-        { title: "next.config.js Options", url: "#" },
-        { title: "CLI", url: "#" },
-        { title: "Edge Runtime", url: "#" },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        { title: "Accessibility", url: "#" },
-        { title: "Fast Refresh", url: "#" },
-        { title: "Next.js Compiler", url: "#" },
-        { title: "Supported Browsers", url: "#" },
-        { title: "Turbopack", url: "#" },
-      ],
-    },
-  ],
-}
+import { NavLink } from 'react-router-dom'
+import {
+  Home,
+  Youtube,
+  Folder,
+  Heart,
+  Clock,
+  User,
+  Upload
+} from 'lucide-react'
 
 export function AppSidebar() {
+  const navData = [
+    {
+      title: "Main",
+      items: [
+        { title: "Home", url: "/", icon: <Home size={18} /> },
+        { title: "Subscriptions", url: "/subscriptions", icon: <Youtube size={18} /> },
+        { title: "Playlists", url: "/playlists", icon: <Folder size={18} /> },
+        { title: "Liked Videos", url: "/likes", icon: <Heart size={18} /> },
+        { title: "History", url: "/history", icon: <Clock size={18} /> },
+      ],
+    },
+    {
+      title: "User",
+      items: [
+        { title: "My Account", url: "/account", icon: <User size={18} /> },
+        { title: "Upload Video", url: "/upload", icon: <Upload size={18} /> },
+      ],
+    },
+  ]
+
   return (
-    <div className="flex flex-col p-4 gap-4">
-      {data.navMain.map((group) => (
+    <div className="flex flex-col p-4 gap-6 w-63 bg-gray-50 h-full border-r">
+      {navData.map((group) => (
         <div key={group.title}>
-          <h3 className="font-bold mb-2">{group.title}</h3>
-          <ul className="ml-4 flex flex-col gap-1">
+          <h3 className="font-bold mb-2 text-gray-700">{group.title}</h3>
+          <ul className="ml-2 flex flex-col gap-2">
             {group.items.map((item) => (
-              <li key={item.title} className={item.isActive ? 'font-bold' : ''}>
-                <a href={item.url}>{item.title}</a>
+              <li key={item.title}>
+                <NavLink
+                  to={item.url}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-200 ${
+                      isActive ? "bg-gray-300 font-semibold" : ""
+                    }`
+                  }
+                >
+                  {item.icon}
+                  <span>{item.title}</span>
+                </NavLink>
               </li>
             ))}
           </ul>
