@@ -3,6 +3,7 @@ import './App.css'
 import { VideoCard } from './components/video-card';
 import axios from 'axios'
 import { useSelector } from 'react-redux';
+import IntroPage from './pages/IntroPage';
 
 function App() {
   const [videos, setVideos] = useState<any[]>([])
@@ -27,7 +28,8 @@ function App() {
     fetchData()
   }, [loginStatus])
 
-  if (!loginStatus) return <div>Welcome to endless world of videos. Plan your uploads, handle your channel and enjoy!!</div>
+  if (!loginStatus) return <IntroPage />
+  // <div>Welcome to endless world of videos. Plan your uploads, handle your channel and enjoy!!</div>
 
   if (loading) return <div>Loading videos...</div>
 

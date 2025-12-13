@@ -20,6 +20,7 @@ export const loginDetailsSlice = createSlice({
 
         logout: (state) => {
             state.status = false;
+            localStorage.setItem('loginStatus', 'false')
             state.userData = null;
         },
 

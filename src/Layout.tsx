@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Header from './components/Header'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { AppSidebar } from '@/components/app-sidebar'
 
 function Layout() {
@@ -18,7 +18,9 @@ function Layout() {
         }}
       >
         <div className="flex justify-between items-center p-3 border-b">
-          <img src="logo.png" alt="logo" className="w-31.5" />
+          <Link to="/">
+            <img src="logo.png" alt="logo" className="w-31.5" />
+          </Link>
           <button onClick={toggleSidebar} className="text-xl font-bold">
             ✕
           </button>

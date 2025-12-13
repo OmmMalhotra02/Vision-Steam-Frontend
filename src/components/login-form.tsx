@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux"
 import { login, setShowLoginPage } from "@/store/loginSlice"
 import { useState } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export function LoginForm({
   className,
@@ -75,7 +75,9 @@ export function LoginForm({
         <CardHeader>
           <div className="flex flex-1 justify-between">
             <CardTitle className="text-2xl">Login</CardTitle>
-            <X onClick={() => dispatch(setShowLoginPage(false))} />
+            <NavLink to="/">
+              <X onClick={() => dispatch(setShowLoginPage(false))} />
+            </NavLink>
           </div>
           <CardDescription>
             Enter your email below to login to your account
@@ -146,9 +148,11 @@ export function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
-              </a>
+              <NavLink to="/signup">
+                <a href="#" className="underline underline-offset-4">
+                  Sign up
+                </a>
+              </NavLink>
             </div>
           </form>
         </CardContent>
