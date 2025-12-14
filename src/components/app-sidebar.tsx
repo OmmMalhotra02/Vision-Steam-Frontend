@@ -25,7 +25,7 @@ export function AppSidebar() {
     {
       title: "User",
       items: [
-        { title: "My Account", url: "/account", icon: <User size={18} /> },
+        { title: "My Account", url: "/my-account", icon: <User size={18} /> },
         { title: "Upload Video", url: "/upload", icon: <Upload size={18} /> },
       ],
     },

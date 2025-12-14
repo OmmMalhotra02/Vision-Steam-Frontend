@@ -23,9 +23,6 @@ function Subscriptions() {
             try {
                 const res = await axios.get(`/api/subscriptions/c/${subscriberId}`)
                 setChannels(res.data.data.channelsSubscribed);
-                // console.log(res.data.data.channelsSubscribed);
-
-
             } catch (error) {
                 console.error(error);
             }

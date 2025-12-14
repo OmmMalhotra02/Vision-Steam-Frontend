@@ -13,6 +13,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import VideoUpload from './pages/VideoUpload'
 import Subscriptions from './pages/Subscriptions'
 import ChannelVideos from './pages/ChannelVideos'
+import MyAccount from './pages/MyAccount'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,9 +33,13 @@ const router = createBrowserRouter(
         <ProtectedRoute>
           <Subscriptions />
         </ProtectedRoute>} />
-        <Route path='channel/:channelId' element={
+      <Route path='channel/:channelId' element={
         <ProtectedRoute>
           <ChannelVideos />
+        </ProtectedRoute>} />
+      <Route path='my-account' element={
+        <ProtectedRoute>
+          <MyAccount />
         </ProtectedRoute>} />
     </Route>
   )

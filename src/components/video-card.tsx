@@ -6,7 +6,7 @@ interface VideoCardProps {
   videoId: string
   thumbnail: string;
   title: string;
-  channel: string;
+  channel?: string;
   views: number;
   createdAt: string;
 }

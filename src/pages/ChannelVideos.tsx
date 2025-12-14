@@ -20,19 +20,19 @@ function ChannelVideos() {
     }, [channelId])
 
     return (
-    <div className="p-6">
+        <div className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {videos.map((video: any) => (
-              <VideoCard
-                key={video._id}
-                videoId={video._id}
-                thumbnail={video.thumbnail}
-                title={video.title}
-                channel={video.videoOwner.username}
-                views={video.views}
-                createdAt={video.createdAt}
-              />
-            ))}
+                    <VideoCard
+                        key={video._id}
+                        videoId={video._id}
+                        thumbnail={video.thumbnail}
+                        title={video.title}
+                        channel={video.videoOwner.username}
+                        views={video.views}
+                        createdAt={video.createdAt}
+                    />
+                ))}
             </div>
         </div>
     )
