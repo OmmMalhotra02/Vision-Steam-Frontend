@@ -11,6 +11,8 @@ import VideoPage from './pages/VideoPage'
 import SignUp from './pages/SignUp'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import VideoUpload from './pages/VideoUpload'
+import Subscriptions from './pages/Subscriptions'
+import ChannelVideos from './pages/ChannelVideos'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +27,14 @@ const router = createBrowserRouter(
       <Route path='upload' element={
         <ProtectedRoute>
           <VideoUpload />
+        </ProtectedRoute>} />
+      <Route path='subscriptions' element={
+        <ProtectedRoute>
+          <Subscriptions />
+        </ProtectedRoute>} />
+        <Route path='channel/:channelId' element={
+        <ProtectedRoute>
+          <ChannelVideos />
         </ProtectedRoute>} />
     </Route>
   )

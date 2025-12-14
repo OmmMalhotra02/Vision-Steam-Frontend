@@ -15,10 +15,7 @@ const IntroPage = () => {
 
   return (
     <div style={styles.container}>
-      {/* 1. Main Branding Section */}
       <h1 style={styles.logo}>VISION STREAM</h1>
-
-      {/* 2. Catchphrase/Value Proposition */}
       <p style={styles.tagline}>
         Discover, create, and share your world.
       </p>
@@ -26,7 +23,6 @@ const IntroPage = () => {
         The next generation of secured video streaming.
       </h2>
 
-      {/* 3. Call-to-Action Buttons */}
       <div style={styles.ctaGroup}>
         <NavLink to='/signup'>
           <button
@@ -46,7 +42,6 @@ const IntroPage = () => {
         </NavLink>
       </div>
 
-      {/* 4. Optional: Feature Highlights */}
       <div style={styles.featureGrid}>
         <FeatureItem
           icon="🔒"
@@ -68,7 +63,6 @@ const IntroPage = () => {
   );
 };
 
-// --- Sub-Component for Feature Tiles ---
 const FeatureItem: React.FC<{ icon: string, title: string, description: string }> = ({ icon, title, description }) => (
   <div style={styles.featureItem}>
     <div style={styles.featureIcon}>{icon}</div>
@@ -79,7 +73,6 @@ const FeatureItem: React.FC<{ icon: string, title: string, description: string }
 
 export default IntroPage;
 
-// --- Simple Inline Styles for Appearance (Light Theme) ---
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
@@ -88,8 +81,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
-    backgroundColor: '#f9f9f9', // Light gray/off-white background
-    color: '#1a1a1a', // Dark text for contrast
+    backgroundColor: '#f9f9f9',
+    color: '#1a1a1a',
     fontFamily: 'Arial, sans-serif',
     textAlign: 'center',
     padding: '40px 20px',
@@ -97,7 +90,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   logo: {
     fontSize: '3.5rem',
     fontWeight: 900,
-    color: '#D40000', // Slightly deeper red for visibility on light bg
+    color: '#D40000',
     marginBottom: '10px',
     letterSpacing: '2px',
   },
@@ -123,7 +116,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: 600,
     borderRadius: '4px',
     cursor: 'pointer',
-    border: '2px solid #ccc', // Light border
+    border: '2px solid #ccc',
     backgroundColor: 'transparent',
     color: '#1a1a1a',
     transition: 'background-color 0.2s, border-color 0.2s, color 0.2s',
@@ -131,7 +124,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   primaryButton: {
     backgroundColor: '#D40000',
     border: '2px solid #D40000',
-    color: '#ffffff', // White text on primary button for contrast
+    color: '#ffffff',
   },
   featureGrid: {
     display: 'grid',
@@ -141,10 +134,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '100%',
   },
   featureItem: {
-    backgroundColor: '#ffffff', // Pure white tile background
+    backgroundColor: '#ffffff', 
     padding: '25px',
     borderRadius: '8px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)', // Subtle shadow
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
   },
   featureIcon: {
     fontSize: '2rem',

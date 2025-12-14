@@ -16,6 +16,7 @@ import { login, setShowLoginPage } from "@/store/loginSlice"
 import { useState } from "react"
 import axios from "axios"
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export function LoginForm({
   className,
@@ -64,6 +65,7 @@ export function LoginForm({
 
     } catch (error) {
       console.error("API request error", error.response?.data?.message || error.message)
+      toast.error(error.response.data?.message)
     }
   }
 
