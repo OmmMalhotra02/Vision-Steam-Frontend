@@ -1,41 +1,38 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { setShowLoginPage } from '@/store/loginSlice'
+import { useDispatch } from 'react-redux';
+import { setShowLoginPage } from '@/store/loginSlice';
 
 const IntroPage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.logo}>VISION STREAM</h1>
-      <p style={styles.tagline}>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-6">
+      <h1 className="text-4xl font-extrabold text-red-600 mb-4 tracking-wide">VISION STREAM</h1>
+      <p className="text-xl text-gray-600 dark:text-gray-400 mb-4">
         Discover, create, and share your world.
       </p>
-      <h2 style={styles.headline}>
+      <h2 className="text-3xl md:text-4xl font-semibold text-center mb-8">
         The next generation of secured video streaming.
       </h2>
 
-      <div style={styles.ctaGroup}>
+      <div className="flex gap-6 mb-12">
         <NavLink to='/signup'>
-          <button
-            style={{ ...styles.button, ...styles.primaryButton }}
-          >
+          <button className="px-6 py-3 text-lg font-semibold rounded-md bg-red-600 text-white border-2 border-red-600 hover:bg-transparent hover:text-red-600 transition">
             Join Vision Stream
           </button>
         </NavLink>
         <NavLink to='/login'>
           <button
-            style={styles.button}
+            className="px-6 py-3 text-lg font-semibold rounded-md border-2 border-gray-400 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white dark:border-gray-600 transition"
             onClick={() => dispatch(setShowLoginPage(true))}
-
           >
             Sign In
           </button>
         </NavLink>
       </div>
 
-      <div style={styles.featureGrid}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
         <FeatureItem
           icon="🔒"
           title="Fully Secured"
@@ -57,94 +54,11 @@ const IntroPage = () => {
 };
 
 const FeatureItem: React.FC<{ icon: string, title: string, description: string }> = ({ icon, title, description }) => (
-  <div style={styles.featureItem}>
-    <div style={styles.featureIcon}>{icon}</div>
-    <h3 style={styles.featureTitle}>{title}</h3>
-    <p style={styles.featureDescription}>{description}</p>
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+    <div className="text-4xl mb-4">{icon}</div>
+    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">{title}</h3>
+    <p className="text-gray-600 dark:text-gray-400 mt-2">{description}</p>
   </div>
 );
 
 export default IntroPage;
-
-
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    backgroundColor: '#f9f9f9',
-    color: '#1a1a1a',
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'center',
-    padding: '40px 20px',
-  },
-  logo: {
-    fontSize: '3.5rem',
-    fontWeight: 900,
-    color: '#D40000',
-    marginBottom: '10px',
-    letterSpacing: '2px',
-  },
-  tagline: {
-    fontSize: '1.2rem',
-    color: '#555555',
-    marginBottom: '5px',
-  },
-  headline: {
-    fontSize: '2.5rem',
-    maxWidth: '800px',
-    margin: '0 0 40px 0',
-    fontWeight: 700,
-  },
-  ctaGroup: {
-    display: 'flex',
-    gap: '20px',
-    marginBottom: '80px',
-  },
-  button: {
-    padding: '12px 30px',
-    fontSize: '1.1rem',
-    fontWeight: 600,
-    borderRadius: '4px',
-    cursor: 'pointer',
-    border: '2px solid #ccc',
-    backgroundColor: 'transparent',
-    color: '#1a1a1a',
-    transition: 'background-color 0.2s, border-color 0.2s, color 0.2s',
-  },
-  primaryButton: {
-    backgroundColor: '#D40000',
-    border: '2px solid #D40000',
-    color: '#ffffff',
-  },
-  featureGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '30px',
-    maxWidth: '1000px',
-    width: '100%',
-  },
-  featureItem: {
-    backgroundColor: '#ffffff', 
-    padding: '25px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
-  },
-  featureIcon: {
-    fontSize: '2rem',
-    marginBottom: '10px',
-  },
-  featureTitle: {
-    fontSize: '1.3rem',
-    fontWeight: 600,
-    margin: '0 0 10px 0',
-    color: '#1a1a1a',
-  },
-  featureDescription: {
-    fontSize: '1rem',
-    color: '#555555',
-    margin: 0,
-  }
-};

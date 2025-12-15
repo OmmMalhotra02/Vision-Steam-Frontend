@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
 import {
     VideoPlayer,
     VideoPlayerContent,
@@ -12,18 +12,18 @@ import {
     VideoPlayerMuteButton,
     VideoPlayerSeekBackwardButton,
     VideoPlayerSeekForwardButton,
-} from "@/components/ui/shadcn-io/video-player";
+} from "@/components/ui/shadcn-io/video-player"
 import { useParams } from 'react-router-dom'
-import apiClient from '@/api/apiClient';
-import { useSelector } from 'react-redux';
+import apiClient from '@/api/apiClient'
+import { useSelector } from 'react-redux'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Heart, Share2, Download, Bell, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import confetti from "canvas-confetti"
 
 function VideoPage() {
-    const { videoId } = useParams();
-    const loginStatus = useSelector((state: any) => state.login.status);
+    const { videoId } = useParams()
+    const loginStatus = useSelector((state: any) => state.login.status)
     const loginUserId = useSelector((state: any) => state.login.userData?._id)
     const [loading, setLoading] = useState(false)
     const [comment, setComment] = useState("")
@@ -32,8 +32,6 @@ function VideoPage() {
     const [videoData, setVideoData] = useState(null)
     const [likesCount, setLikesCount] = useState(videoData?.likes || 0)
     const [subscribed, setSubscribed] = useState(null)
-
-    console.log("LOGIN USER ID", comments);
 
     const fireConfetti = () => {
         confetti({
@@ -44,12 +42,11 @@ function VideoPage() {
         })
     }
 
-
     const handleAddComment = async () => {
         if (!comment) return
         try {
             const res = await apiClient.post(`/api/comments/${videoId}`, { content: comment })
-            const newComment = res.data.data;
+            const newComment = res.data.data
 
             setComments(prev => [...prev, {
                 text: newComment.content,
@@ -57,12 +54,11 @@ function VideoPage() {
                     fullName: newComment.owner.fullName,
                     avatar: newComment.owner.avatar
                 }
-            }]);
-            setComment("");
-            toast.success("Comment added!");
-
+            }])
+            setComment("")
+            toast.success("Comment added!")
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
@@ -70,10 +66,10 @@ function VideoPage() {
         try {
             await apiClient.delete(`/api/comments/${commentId}`)
             setComments((prev) => prev.filter(c => c._id !== commentId))
-            toast.success("Comment deleted!");
+            toast.success("Comment deleted!")
         } catch (error) {
-            console.error(error);
-            toast.error("Failed to delete comment");
+            console.error(error)
+            toast.error("Failed to delete comment")
         }
     }
 
@@ -82,10 +78,9 @@ function VideoPage() {
             await navigator.clipboard.writeText(videoData.videoFile)
             toast.success("Video link copied!", { duration: 3000 })
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
     }
-
 
     const handleLike = async () => {
         try {
@@ -131,7 +126,6 @@ function VideoPage() {
                 setLike(video.isLiked)
                 setSubscribed(video.isSubscribed ?? false)
                 setLikesCount(video.likesCount)
-                // console.log("Fetched URL:", response.data.data);
 
                 const commentResponse = await apiClient.get(`/api/comments/${videoId}`)
                 const mappedComments = commentResponse.data.data.map((c: any) => ({
@@ -153,16 +147,14 @@ function VideoPage() {
         if (loginStatus) fetchVideoUrl()
     }, [videoId, loginStatus])
 
-
-    if (!loginStatus) return <div>Please login to watch this video.</div>;
+    if (!loginStatus) return <div>Please login to watch this video.</div>
     if (loading) return <div>Loading Video.....</div>
     if (!videoData?.videoFile) return <div>Video not found</div>
 
     return (
-        <div className="p-6">
+        <div className="p-6 dark:bg-gray-800 dark:text-white">
             <VideoPlayer className="w-full h-[400px]">
                 <VideoPlayerContent src={videoData?.videoFile} controls className="w-full h-full" poster={videoData?.thumbnail} />
-
                 <VideoPlayerControlBar>
                     <VideoPlayerPlayButton />
                     <VideoPlayerSeekBackwardButton />
@@ -173,9 +165,9 @@ function VideoPage() {
                     <VideoPlayerVolumeRange />
                 </VideoPlayerControlBar>
             </VideoPlayer>
-            <h2 className="text-2xl font-bold">{videoData?.title}</h2>
+            <h2 className="text-2xl font-bold mt-4">{videoData?.title}</h2>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
                 <div className="flex items-center gap-3">
                     <Avatar>
                         <AvatarImage src={videoData?.ownerAvatar || "https://res.cloudinary.com/dtx0qlu9l/image/upload/v1765610926/jgojbw8xlduqisqfvxbz.png"} />
@@ -193,7 +185,7 @@ function VideoPage() {
                         <span>{likesCount}</span>
                     </div>
 
-                    <div className="flex items-center gap-2 cursor-pointer hover:text-blue-500 transition" onClick={handleShare} >
+                    <div className="flex items-center gap-2 cursor-pointer hover:text-blue-500 transition" onClick={handleShare}>
                         <Share2 size={24} />
                         <span>Share</span>
                     </div>
@@ -206,7 +198,7 @@ function VideoPage() {
                     <button
                         onClick={handleSubscribe}
                         className={`ml-auto flex items-center gap-2 px-4 py-2 rounded-lg transition
-    ${subscribed
+                            ${subscribed
                                 ? "bg-gray-200 text-gray-800 hover:bg-gray-300"
                                 : "bg-red-600 text-white hover:bg-red-700"
                             }`}
@@ -217,7 +209,7 @@ function VideoPage() {
                 </div>
             </div>
 
-            <div className="mt-4 text-gray-700">
+            <div className="mt-4 text-gray-700 dark:text-white">
                 <h3 className="font-semibold text-lg mb-1">Description</h3>
                 <p>{videoData?.description}</p>
             </div>
@@ -243,7 +235,7 @@ function VideoPage() {
                                 )}
                             </Avatar>
 
-                            <div className="bg-gray-100 p-2 rounded-md flex-1">
+                            <div className="bg-gray-100 dark:bg-gray-700 p-2 rounded-md flex-1">
                                 <p className="font-semibold text-sm">{c.user.fullName}</p>
                                 <p className="text-sm">{c.text}</p>
                             </div>
@@ -259,11 +251,9 @@ function VideoPage() {
                         </div>
                     ))}
                 </div>
-
             </div>
         </div>
     )
 }
-
 
 export default VideoPage

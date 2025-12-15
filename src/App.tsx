@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { VideoCard } from './components/video-card';
-import axios from 'axios'
-import { useSelector } from 'react-redux';
-import IntroPage from './pages/IntroPage';
-import apiClient from './api/apiClient';
+import { VideoCard } from './components/video-card'
+import { useSelector } from 'react-redux'
+import IntroPage from './pages/IntroPage'
+import apiClient from './api/apiClient'
 
 function App() {
   const [videos, setVideos] = useState<any[]>([])
@@ -18,7 +17,7 @@ function App() {
       try {
         setLoading(true)
         const response = await apiClient.get('/api/videos/all-videos')
-        setVideos(response.data.data) // ensure correct path
+        setVideos(response.data.data)
       } catch (error) {
         console.log("Failed fetching all videos", error)
       } finally {
@@ -30,12 +29,25 @@ function App() {
   }, [loginStatus])
 
   if (!loginStatus) return <IntroPage />
-  // <div>Welcome to endless world of videos. Plan your uploads, handle your channel and enjoy!!</div>
 
-  if (loading) return <div>Loading videos...</div>
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh] text-gray-700 dark:text-gray-300">
+        Loading videos...
+      </div>
+    )
+  }
 
   return (
-    <div className="p-6">
+    <div
+      className="
+        min-h-screen
+        px-4 py-4
+        sm:px-6 sm:py-6
+        bg-gray-50 dark:bg-gray-900
+        text-gray-900 dark:text-gray-100
+      "
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {videos.map((video: any) => (
           <VideoCard
@@ -52,7 +64,5 @@ function App() {
     </div>
   )
 }
-
-
 
 export default App

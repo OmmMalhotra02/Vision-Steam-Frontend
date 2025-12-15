@@ -27,29 +27,50 @@ function Subscriptions() {
             }
         }
         fetchSubscribedChannels()
-    }, [])
+    }, [subscriberId])
 
     return (
-        <div className=" p-10 flex flex-row flex-wrap items-center gap-12">
-            {
-                channels.map((channel: any) => (
-                    <div key={channel._id} className='flex flex-col justify-center items-center gap-5'>
-                        <NavLink to={`/channel/${channel.channel._id}`} className="flex flex-col justify-center items-center gap-5">
-                        <Avatar className="w-56 h-56">
-                            <AvatarImage src={channel.channel.avatar} alt="@shadcn" className='size-xl' />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                        <p className="text-lg font-semibold">
+        <div className="min-h-screen px-6 py-10 dark:bg-gray-950 text-gray-100 flex flex-col items-center">
+
+            <h1 className="text-2xl sm:text-3xl font-semibold mb-10 tracking-wide">
+                Your Subscriptions
+            </h1>
+
+            <div className="flex flex-wrap justify-center gap-16">
+                {channels.map((channel: any) => (
+                    <NavLink
+                        key={channel._id}
+                        to={`/channel/${channel.channel._id}`}
+                        className="group flex flex-col items-center gap-4 transition-transform hover:scale-105"
+                    >
+
+                        <div className="
+            rounded-full p-1
+            bg-linear-to-tr
+            from-indigo-500/40 via-purple-500/40 to-pink-500/40
+            group-hover:from-indigo-500 group-hover:to-pink-500
+            transition-all
+          ">
+                            <Avatar className="w-40 h-40 sm:w-52 sm:h-52 bg-gray-900">
+                                <AvatarImage
+                                    src={channel.channel.avatar}
+                                    alt={channel.channel.username}
+                                    className="rounded-full object-cover"
+                                />
+                                <AvatarFallback className="text-xl">CN</AvatarFallback>
+                            </Avatar>
+                        </div>
+
+                        <div className="px-5 py-1 rounded-full bg-gray-800 text-sm sm:text-base font-medium">
                             {channel.channel.username}
-                        </p>
-                        </NavLink>
-                    </div>
-
-                ))
-            }
-
+                        </div>
+                    </NavLink>
+                ))}
+            </div>
         </div>
     )
+
+
 }
 
 export default Subscriptions

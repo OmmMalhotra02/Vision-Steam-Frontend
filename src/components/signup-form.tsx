@@ -67,12 +67,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
     try {
       const response = await apiClient.post('/api/users/register', formDataToSend)
-      
-      // ✅ Registration successful
       setSignupMessage("Account created successfully! Please login.")
       setLoading(false)
 
-      // Show login page
       dispatch(setShowLoginPage(true))
     } catch (error: any) {
       setSignupError(

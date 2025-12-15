@@ -1,28 +1,18 @@
-import { cn } from "@/lib/utils"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Eye, EyeOff } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Eye, EyeOff } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { X } from "lucide-react"
 import { useDispatch } from "react-redux"
 import { login, setShowLoginPage } from "@/store/loginSlice"
-import { useState } from "react"
-import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import apiClient from "@/api/apiClient";
+import { NavLink, useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+import apiClient from "@/api/apiClient"
+import { cn } from "@/lib/utils"
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-
+export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState(false)
@@ -30,14 +20,14 @@ export function LoginForm({
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   })
 
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
+    const { name, value } = e.target
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }))
   }
 
@@ -47,22 +37,16 @@ export function LoginForm({
     const loginPayload = {
       username: formData.username,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
     }
 
-    // const jsonPayload = JSON.stringify(loginPayload)
-
     try {
-      const response = await apiClient.post('/api/users/login', loginPayload)
-      console.log(response.data)
-
+      const response = await apiClient.post("/api/users/login", loginPayload)
       const { user, accessToken } = response.data.data
-      localStorage.setItem('authToken', accessToken)
+      localStorage.setItem("authToken", accessToken)
       dispatch(login({ user }))
       dispatch(setShowLoginPage(false))
       navigate("/")
-      // console.log(response.data?.message);
-
     } catch (error) {
       console.error("API request error", error.response?.data?.message || error.message)
       toast.error(error.response.data?.message)
@@ -81,9 +65,7 @@ export function LoginForm({
               <X onClick={() => dispatch(setShowLoginPage(false))} />
             </NavLink>
           </div>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardDescription>Enter your email below to login to your account</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -113,10 +95,7 @@ export function LoginForm({
               <div className="grid gap-2 relative">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
+                  <a href="#" className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
                     Forgot your password?
                   </a>
                 </div>
@@ -126,7 +105,8 @@ export function LoginForm({
                   name="password"
                   required
                   type={showPassword ? "text" : "password"}
-                  onChange={handleChange} />
+                  onChange={handleChange}
+                />
                 <Button
                   className="absolute top-0 right-0 h-full px-3 hover:bg-transparent mt-3"
                   onClick={() => setShowPassword(!showPassword)}

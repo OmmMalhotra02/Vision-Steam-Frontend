@@ -1,16 +1,12 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from "react"
+import { NavLink } from "react-router-dom"
 import {
-  Home,
-  Youtube,
-  Folder,
-  Heart,
-  Clock,
-  User,
-  Upload
-} from 'lucide-react'
+  Home, Youtube, Folder, Heart, Clock, User, Upload, Menu, X
+} from "lucide-react"
 
 export function AppSidebar() {
+  const [isOpen, setIsOpen] = useState(false)
+
   const navData = [
     {
       title: "Main",
@@ -32,29 +28,79 @@ export function AppSidebar() {
   ]
 
   return (
-    <div className="flex flex-col p-4 gap-6 w-63 bg-gray-50 h-full border-r">
-      {navData.map((group) => (
-        <div key={group.title}>
-          <h3 className="font-bold mb-2 text-gray-700">{group.title}</h3>
-          <ul className="ml-2 flex flex-col gap-2">
-            {group.items.map((item) => (
-              <li key={item.title}>
-                <NavLink
-                  to={item.url}
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-200 ${
-                      isActive ? "bg-gray-300 font-semibold" : ""
-                    }`
-                  }
-                >
-                  {item.icon}
-                  <span>{item.title}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
+    <>
+      {/* Mobile open button */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded
+          bg-gray-100 text-gray-900
+          dark:bg-gray-800 dark:text-gray-100"
+        onClick={() => setIsOpen(true)}
+      >
+        <Menu size={20} />
+      </button>
+
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 z-40 transition-opacity md:hidden
+          bg-black/40
+          ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
+        `}
+        onClick={() => setIsOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 p-4 gap-6 z-50
+          border-r transition-transform duration-300
+          bg-gray-50 text-gray-900 border-gray-200
+          dark:bg-gray-900 dark:text-gray-100 dark:border-gray-800
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0 md:static md:flex md:flex-col
+        `}
+      >
+        {/* Mobile close */}
+        <button
+          className="md:hidden mb-4 p-2 rounded
+            hover:bg-gray-200 dark:hover:bg-gray-800"
+          onClick={() => setIsOpen(false)}
+        >
+          <X size={20} />
+        </button>
+
+        {navData.map((group) => (
+          <div key={group.title}>
+            <h3 className="mb-2 text-sm font-semibold
+              text-gray-600 dark:text-gray-400">
+              {group.title}
+            </h3>
+
+            <ul className="ml-1 flex flex-col gap-1 border-b border-gray-500">
+              {group.items.map((item) => (
+                <li key={item.title}>
+                  <NavLink
+                    to={item.url}
+                    className={({ isActive }) =>
+                      `
+                      flex items-center gap-2 px-3 py-2 rounded-md
+                      transition-colors
+                      hover:bg-gray-200 dark:hover:bg-gray-800
+                      ${
+                        isActive
+                          ? "bg-gray-300 dark:bg-gray-700 font-medium"
+                          : ""
+                      }
+                      `
+                    }
+                  >
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }

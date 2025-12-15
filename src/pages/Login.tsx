@@ -7,8 +7,8 @@ function Login() {
     const loginPage = useSelector((state: any) => state.login.showLoginPage)
 
     return (
-        <div className='flex items-center justify-center h-screen'>
-            {loginPage && <LoginForm className='w-120 flex align-middle justify-between' />}
+        <div className='flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900'>
+            {loginPage && <LoginForm className='w-full sm:w-96 flex justify-between' />}
         </div>
     )
 }

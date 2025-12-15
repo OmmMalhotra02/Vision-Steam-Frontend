@@ -13,19 +13,35 @@ function Header({ toggleSidebar }: HeaderProps) {
   const loginStatus = useSelector((state: any) => state.login.status)
 
   return (
-    <nav className="flex flex-1 items-center justify-between mr-5">
+    <nav className="
+      w-full
+      flex items-center justify-between
+      px-6 py-3
+      bg-gray-100 dark:bg-gray-900
+    text-gray-900 dark:text-gray-100
+      border-b border-gray-400
+    ">
       <div className="flex gap-4 items-center">
-        <button onClick={toggleSidebar} className="w-10 h-10 text-xl">
+        <button
+          onClick={toggleSidebar}
+          className="w-10 h-10 text-xl text-white"
+        >
           ☰
         </button>
         <img src="logo.png" alt="logo" className="w-35 hidden md:block" />
       </div>
 
-      <div>
+      <div className="hidden md:flex justify-center flex-1">
         <input
           type="text"
           placeholder="Search"
-          className="border border-black w-150 h-11 rounded-4xl p-4"
+          className="
+            w-full max-w-[420px] h-11
+            rounded-full px-5
+            bg-gray-100 dark:bg-gray-900 text-white
+            border border-neutral-700
+            focus:outline-none
+          "
         />
       </div>
 
@@ -48,5 +64,6 @@ function Header({ toggleSidebar }: HeaderProps) {
     </nav>
   )
 }
+
 
 export default Header
