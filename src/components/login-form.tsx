@@ -56,8 +56,8 @@ export function LoginForm({
       const response = await apiClient.post('/api/users/login', loginPayload)
       // console.log(response);
 
-      const { user } = response.data.data
-
+      const { user, token } = response.data.data
+      localStorage.setItem('authToken', token) 
       dispatch(login({ user }))
       dispatch(setShowLoginPage(false))
       navigate("/")

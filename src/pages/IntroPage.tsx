@@ -3,13 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { setShowLoginPage } from '@/store/loginSlice'
 
-
-// Define the component's props if you need to pass down callbacks for login/signup
-// interface IntroPageProps {
-//   onLogin: () => void;
-//   onSignup: () => void;
-// }
-
 const IntroPage = () => {
   const dispatch = useDispatch()
 
