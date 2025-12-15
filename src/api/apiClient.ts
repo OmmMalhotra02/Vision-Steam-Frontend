@@ -8,4 +8,12 @@ const apiClient = axios.create({
   withCredentials: true
 });
 
+apiClient.interceptors.request.use(config => {
+  if (config.url && config.url.startsWith('/api/')) {
+    // Remove the first '/api' to avoid double /api/v1/api/...
+    config.url = config.url.replace(/^\/api/, '');
+  }
+  return config;
+}, error => Promise.reject(error));
+
 export default apiClient;
