@@ -4,6 +4,7 @@ import { VideoCard } from './components/video-card';
 import axios from 'axios'
 import { useSelector } from 'react-redux';
 import IntroPage from './pages/IntroPage';
+import apiClient from './api/apiClient';
 
 function App() {
   const [videos, setVideos] = useState<any[]>([])
@@ -16,7 +17,7 @@ function App() {
 
       try {
         setLoading(true)
-        const response = await axios.get('/api/videos/all-videos')
+        const response = await apiClient.get('/api/videos/all-videos')
         setVideos(response.data.data) // ensure correct path
       } catch (error) {
         console.log("Failed fetching all videos", error)

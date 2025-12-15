@@ -14,7 +14,7 @@ import {
     VideoPlayerSeekForwardButton,
 } from "@/components/ui/shadcn-io/video-player";
 import { useParams } from 'react-router-dom'
-import axios from 'axios';
+import apiClient from '@/api/apiClient';
 import { useSelector } from 'react-redux';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Heart, Share2, Download, Bell, Trash2 } from "lucide-react"
@@ -48,7 +48,7 @@ function VideoPage() {
     const handleAddComment = async () => {
         if (!comment) return
         try {
-            const res = await axios.post(`/api/comments/${videoId}`, { content: comment })
+            const res = await apiClient.post(`/api/comments/${videoId}`, { content: comment })
             const newComment = res.data.data;
 
             setComments(prev => [...prev, {
@@ -68,7 +68,7 @@ function VideoPage() {
 
     const handleDeleteComment = async (commentId) => {
         try {
-            await axios.delete(`/api/comments/${commentId}`)
+            await apiClient.delete(`/api/comments/${commentId}`)
             setComments((prev) => prev.filter(c => c._id !== commentId))
             toast.success("Comment deleted!");
         } catch (error) {
@@ -89,7 +89,7 @@ function VideoPage() {
 
     const handleLike = async () => {
         try {
-            const res = await axios.post(`/api/likes/toggle/v/${videoId}`)
+            const res = await apiClient.post(`/api/likes/toggle/v/${videoId}`)
             if (res.data.message.includes("Liked")) {
                 setLike(true)
                 setLikesCount((prev: any) => prev + 1)
@@ -104,7 +104,7 @@ function VideoPage() {
 
     const handleSubscribe = async () => {
         try {
-            const res = await axios.post(`/api/subscriptions/c/${videoData.owner}`)
+            const res = await apiClient.post(`/api/subscriptions/c/${videoData.owner}`)
 
             const isSubscribed = res.data.data.subscribed
             setSubscribed(isSubscribed)
@@ -125,7 +125,7 @@ function VideoPage() {
         const fetchVideoUrl = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`/api/videos/${videoId}`)
+                const response = await apiClient.get(`/api/videos/${videoId}`)
                 const video = response.data.data
                 setVideoData(video)
                 setLike(video.isLiked)
@@ -133,7 +133,7 @@ function VideoPage() {
                 setLikesCount(video.likesCount)
                 // console.log("Fetched URL:", response.data.data);
 
-                const commentResponse = await axios.get(`/api/comments/${videoId}`)
+                const commentResponse = await apiClient.get(`/api/comments/${videoId}`)
                 const mappedComments = commentResponse.data.data.map((c: any) => ({
                     _id: c._id,
                     text: c.content,

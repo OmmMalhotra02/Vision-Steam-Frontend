@@ -3,7 +3,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useForm, Controller } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Dropzone, DropzoneEmptyState, DropzoneContent } from '@/components/ui/shadcn-io/dropzone'
-import axios from 'axios'
+import apiClient from '@/api/apiClient'
 import { toast } from 'sonner'
 import { useState } from 'react'
 
@@ -47,7 +47,7 @@ function VideoUpload() {
                 formData.append("thumbnail", properThumbnail);
             }
 
-            const res = await axios.post('/api/videos/', formData);
+            const res = await apiClient.post('/api/videos/', formData);
             toast.success("Video uploaded successfully");
             reset({
                 title: "",

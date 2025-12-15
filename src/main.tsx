@@ -14,6 +14,7 @@ import VideoUpload from './pages/VideoUpload'
 import Subscriptions from './pages/Subscriptions'
 import ChannelVideos from './pages/ChannelVideos'
 import MyAccount from './pages/MyAccount'
+import UnderConstruction from './pages/UnderConstruction'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
         <ProtectedRoute>
           <MyAccount />
         </ProtectedRoute>} />
+      <Route path="*" element={<UnderConstruction />} />
     </Route>
   )
 )

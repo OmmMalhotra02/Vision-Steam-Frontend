@@ -18,7 +18,7 @@ import { X } from "lucide-react"
 import { setShowLoginPage } from '@/store/loginSlice'
 import { useDispatch } from 'react-redux'
 import { useState } from "react"
-import axios from "axios"
+import apiClient from "@/api/apiClient"
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const dispatch = useDispatch()
@@ -66,7 +66,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     if (formData.coverImage) formDataToSend.append("coverImage", formData.coverImage)
 
     try {
-      const response = await axios.post('/api/users/register', formDataToSend)
+      const response = await apiClient.post('/api/users/register', formDataToSend)
       
       // ✅ Registration successful
       setSignupMessage("Account created successfully! Please login.")

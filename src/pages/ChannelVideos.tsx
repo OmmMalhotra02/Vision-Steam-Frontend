@@ -1,5 +1,5 @@
 import { VideoCard } from '@/components/video-card'
-import axios from 'axios'
+import apiClient from '@/api/apiClient'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -12,9 +12,9 @@ function ChannelVideos() {
         if (!channelId) return
 
         const fetchVideos = async () => {
-            const res = await axios.get(`/api/subscriptions/s/${channelId}`)
+            const res = await apiClient.get(`/api/subscriptions/s/${channelId}`)
             setVideos(res.data.data.videos)
-            console.log(res);
+            // console.log(res);
         }
         fetchVideos()
     }, [channelId])

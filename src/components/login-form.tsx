@@ -14,9 +14,9 @@ import { X } from "lucide-react"
 import { useDispatch } from "react-redux"
 import { login, setShowLoginPage } from "@/store/loginSlice"
 import { useState } from "react"
-import axios from "axios"
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import apiClient from "@/api/apiClient";
 
 export function LoginForm({
   className,
@@ -53,15 +53,15 @@ export function LoginForm({
     // const jsonPayload = JSON.stringify(loginPayload)
 
     try {
-      const response = await axios.post('/api/users/login', loginPayload)
-      console.log(response);
+      const response = await apiClient.post('/api/users/login', loginPayload)
+      // console.log(response);
 
       const { user } = response.data.data
 
       dispatch(login({ user }))
       dispatch(setShowLoginPage(false))
       navigate("/")
-      console.log(response.data?.message);
+      // console.log(response.data?.message);
 
     } catch (error) {
       console.error("API request error", error.response?.data?.message || error.message)

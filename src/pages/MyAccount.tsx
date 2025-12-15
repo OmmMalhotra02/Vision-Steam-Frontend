@@ -13,7 +13,7 @@ import {
     TabsContent,
 } from "@/components/ui/tabs"
 import { VideoCard } from "@/components/video-card"
-import axios from "axios"
+import apiClient from "@/api/apiClient"
 import { Button } from "@/components/ui/button"
 
 function MyAccount() {
@@ -22,7 +22,7 @@ function MyAccount() {
 
     useEffect(() => {
         const handleVideos = async () => {
-            const res = await axios.get("/api/dashboard/videos")
+            const res = await apiClient.get("/api/dashboard/videos")
             setVideos(res.data.data)
         }
         handleVideos()

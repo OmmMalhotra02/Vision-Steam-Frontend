@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { VideoCard } from '@/components/video-card'
-import axios from 'axios'
+import apiClient from '@/api/apiClient'
 import { useSelector } from 'react-redux'
 import {
     Avatar,
@@ -21,7 +20,7 @@ function Subscriptions() {
 
         const fetchSubscribedChannels = async () => {
             try {
-                const res = await axios.get(`/api/subscriptions/c/${subscriberId}`)
+                const res = await apiClient.get(`/api/subscriptions/c/${subscriberId}`)
                 setChannels(res.data.data.channelsSubscribed);
             } catch (error) {
                 console.error(error);
