@@ -2,7 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 
 interface VideoCardProps {
-  key: string;
   videoId: string;
   thumbnail: string;
   title: string;
@@ -12,7 +11,6 @@ interface VideoCardProps {
 }
 
 export function VideoCard({
-  key,
   videoId,
   thumbnail,
   title,

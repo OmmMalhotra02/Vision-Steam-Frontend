@@ -42,8 +42,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
     try {
       const response = await apiClient.post("/api/users/login", loginPayload)
-      const { user, accessToken } = response.data.data
-      localStorage.setItem("authToken", accessToken)
+      const { user } = response.data.data
       dispatch(login({ user }))
       dispatch(setShowLoginPage(false))
       navigate("/")
@@ -57,7 +56,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
         <CardHeader>
           <div className="flex flex-1 justify-between">
             <CardTitle className="text-2xl">Login</CardTitle>

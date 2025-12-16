@@ -1,12 +1,27 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import { Link, Outlet } from 'react-router-dom'
 import { AppSidebar } from '@/components/app-sidebar'
 import { Toaster } from "@/components/ui/sonner"
 
+const DESKTOP_BREAKPOINT = 768
+
 function Layout() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= DESKTOP_BREAKPOINT)
   const toggleSidebar = () => setSidebarOpen(prev => !prev)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= DESKTOP_BREAKPOINT) {
+        setSidebarOpen(true)
+      } else {
+        setSidebarOpen(false)
+      }
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   return (
     <div className="flex h-screen">
@@ -38,7 +53,7 @@ function Layout() {
 
       <div className="flex-1 flex flex-col">
 
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b-2 border-white">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b border-gray-200 dark:border-gray-800">
           <Header toggleSidebar={toggleSidebar} />
         </header>
 

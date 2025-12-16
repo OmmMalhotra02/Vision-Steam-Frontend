@@ -80,61 +80,63 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   }
 
   return (
-    <Card {...props}>
+    <Card {...props} className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700">
       <CardHeader>
         <div className="flex flex-1 justify-between">
-          <CardTitle className="text-2xl">Create an account</CardTitle>
+          <CardTitle className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+            Create an account</CardTitle>
           <NavLink to="/">
             <X />
           </NavLink>
         </div>
-        <CardDescription>
+        <CardDescription className="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
           Enter your information below to create your account
         </CardDescription>
       </CardHeader>
+      <div className="mx-6 h-px bg-gray-200 dark:bg-gray-700" />
       <CardContent>
         <form onSubmit={handleSubmit}>
           <FieldGroup>
             {signupError && (
-              <div className="mb-3 rounded-md bg-red-100 px-4 py-2 text-sm text-red-700">
+              <div className="mb-3 rounded-md bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">
                 {signupError}
               </div>
             )}
             {signupMessage && (
-              <div className="mb-3 rounded-md bg-green-100 px-4 py-2 text-sm text-green-700">
+              <div className="mb-3 rounded-md bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">
                 {signupMessage}
               </div>
             )}
 
             <Field>
-              <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input id="name" name="fullName" type="text" placeholder="John Doe" required onChange={handleChange} />
+              <FieldLabel htmlFor="name" className="text-gray-700 dark:text-gray-300">Full Name</FieldLabel>
+              <Input id="name" name="fullName" type="text" placeholder="John Doe" required onChange={handleChange} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="username">Username</FieldLabel>
-              <Input id="username" name="username" type="text" placeholder="myusername" required onChange={handleChange} />
+              <FieldLabel htmlFor="username" className="text-gray-700 dark:text-gray-300">Username</FieldLabel>
+              <Input id="username" name="username" type="text" placeholder="myusername" required onChange={handleChange} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input id="email" type="email" name="email" placeholder="m@example.com" required onChange={handleChange} />
+              <FieldLabel htmlFor="email" className="text-gray-700 dark:text-gray-300">Email</FieldLabel>
+              <Input id="email" type="email" name="email" placeholder="m@example.com" required onChange={handleChange} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500" />
               <FieldDescription>
                 We&apos;ll use this to contact you. We will not share your email with anyone else.
               </FieldDescription>
             </Field>
             <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input id="password" name="password" type="password" required onChange={handleChange} />
+              <FieldLabel htmlFor="password" className="text-gray-700 dark:text-gray-300">Password</FieldLabel>
+              <Input id="password" name="password" type="password" required onChange={handleChange} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500" />
             </Field>
             <Field>
-              <FieldLabel htmlFor="avatar">Avatar</FieldLabel>
+              <FieldLabel htmlFor="avatar" className="text-gray-700 dark:text-gray-300">Avatar</FieldLabel>
               <div className="grid w-full max-w-sm items-center gap-3">
-                <Input id="avatar" name="avatar" type="file" onChange={handleChange} />
+                <Input id="avatar" name="avatar" type="file" onChange={handleChange} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500" />
               </div>
             </Field>
             <Field>
-              <FieldLabel htmlFor="cover-image">Cover Image</FieldLabel>
+              <FieldLabel htmlFor="cover-image" className="text-gray-700 dark:text-gray-300">Cover Image</FieldLabel>
               <div className="grid w-full max-w-sm items-center gap-3">
-                <Input id="cover-image" name="coverImage" type="file" onChange={handleChange} />
+                <Input id="cover-image" name="coverImage" type="file" onChange={handleChange} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500" />
               </div>
             </Field>
             <FieldGroup>
@@ -145,7 +147,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 <Button variant="outline" type="button">
                   Sign up with Google
                 </Button>
-                <FieldDescription className="px-6 text-center">
+                <FieldDescription className="text-gray-600 dark:text-gray-400">
                   Already have an account?{" "}
                   <NavLink
                     to="/"

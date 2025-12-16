@@ -47,7 +47,7 @@ function VideoUpload() {
                 formData.append("thumbnail", properThumbnail);
             }
 
-            const res = await apiClient.post('/api/videos/', formData);
+            const res = await apiClient.post('/api/videos/upload/', formData);
             toast.success("Video uploaded successfully");
             reset({
                 title: "",

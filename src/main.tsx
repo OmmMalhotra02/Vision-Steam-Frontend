@@ -15,6 +15,7 @@ import Subscriptions from './pages/Subscriptions'
 import ChannelVideos from './pages/ChannelVideos'
 import MyAccount from './pages/MyAccount'
 import UnderConstruction from './pages/UnderConstruction'
+import { ThemeProvider } from './components/theme-provider'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,7 +49,9 @@ const router = createBrowserRouter(
 )
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <ThemeProvider defaultTheme="light" storageKey="vision-stream-theme">
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </ThemeProvider>
 )

@@ -12,10 +12,10 @@ apiClient.interceptors.request.use(
     if (!config.headers) config.headers = {};
 
     // Attach JWT token automatically
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
+    // const token = localStorage.getItem('authToken');
+    // if (token) {
+    //   config.headers['Authorization'] = `Bearer ${token}`;
+    // }
 
     // Remove leading /api only if it causes double /api/v1/api
     if (config.url && config.url.startsWith('/api/')) {
