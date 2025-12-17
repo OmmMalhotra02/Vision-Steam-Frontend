@@ -65,15 +65,7 @@ function VideoUpload() {
 
     return (
         <div className="min-h-screen flex justify-center px-4 py-10 bg-gray-100 dark:bg-gray-950">
-            <div className="
-    w-full max-w-3xl
-    rounded-2xl
-    bg-white dark:bg-gray-900
-    text-black dark:text-white
-    shadow-xl
-    border border-gray-200 dark:border-gray-800
-    p-8
-  ">
+            <div className="w-full max-w-3xl rounded-2xl bg-white dark:bg-gray-900 text-black dark:text-white shadow-xl border border-gray-200 dark:border-gray-800 p-8">
                 <h1 className="text-3xl font-bold mb-6">Upload Video</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div className="space-y-1">
@@ -200,7 +192,7 @@ function VideoUpload() {
                         )}
                     />
 
-                    <Button type="submit" className="w-full h-11 text-lg" disabled={isSubmitting}>
+                    <Button variant='outline' type="submit" className="w-full h-11 text-lg" disabled={isSubmitting}>
                         {isSubmitting ? "Uploading..." : "Upload"}
                     </Button>
                 </form>

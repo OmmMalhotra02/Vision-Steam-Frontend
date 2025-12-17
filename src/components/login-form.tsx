@@ -16,6 +16,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
   const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     username: "",
@@ -41,9 +42,11 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
     }
 
     try {
+      setLoading(true)
       const response = await apiClient.post("/api/users/login", loginPayload)
       const { user } = response.data.data
       dispatch(login({ user }))
+      setLoading(false)
       dispatch(setShowLoginPage(false))
       navigate("/")
     } catch (error) {
@@ -120,8 +123,8 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                   )}
                 </Button>
               </div>
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" variant="outline" className="w-full" disabled={loading}>
+                {loading ? "Logging In..." : "Log In" }
               </Button>
               <Button variant="outline" className="w-full">
                 Login with Google

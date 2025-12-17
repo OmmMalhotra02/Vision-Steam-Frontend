@@ -27,14 +27,7 @@ function Layout() {
     <div className="flex h-screen">
 
       <div
-        className="
-    fixed top-0 left-0 h-full
-    bg-gray-100 dark:bg-gray-900
-    text-gray-900 dark:text-gray-100
-    shadow-lg
-    transition-transform duration-300
-    z-50
-  "
+        className="fixed top-0 left-0 h-full bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-lg transition-transform duration-300 z-50"
         style={{
           width: 255,
           transform: sidebarOpen ? 'translateX(0)' : 'translateX(-100%)'
