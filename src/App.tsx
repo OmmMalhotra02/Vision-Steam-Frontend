@@ -39,15 +39,7 @@ function App() {
   }
 
   return (
-    <div
-      className="
-        min-h-screen
-        px-4 py-4
-        sm:px-6 sm:py-6
-        bg-gray-50 dark:bg-gray-900
-        text-gray-900 dark:text-gray-100
-      "
-    >
+    <div className="min-h-screen px-4 py-4 sm:px-6 sm:py-6 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {videos.map((video: any) => (
           <VideoCard
@@ -57,7 +49,7 @@ function App() {
             title={video.title}
             channel={video.ownerUser.username}
             views={video.views}
-            createdAt={video.createdAt}
+            createdAt={new Date(video.createdAt).toLocaleDateString()}
           />
         ))}
       </div>

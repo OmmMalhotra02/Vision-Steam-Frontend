@@ -17,6 +17,7 @@ import MyAccount from './pages/MyAccount'
 import UnderConstruction from './pages/UnderConstruction'
 import { ThemeProvider } from './components/theme-provider'
 import VideoUpdate from './pages/VideoUpdate'
+import WatchHistory from './pages/WatchHistory'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,6 +48,10 @@ const router = createBrowserRouter(
         <Route path='video-edit/:videoId' element={
         <ProtectedRoute>
           <VideoUpdate />
+        </ProtectedRoute>} />
+        <Route path='history' element={
+        <ProtectedRoute>
+          <WatchHistory />
         </ProtectedRoute>} />
       <Route path="*" element={<UnderConstruction />} />
     </Route>
