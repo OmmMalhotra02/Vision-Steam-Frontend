@@ -18,6 +18,7 @@ import UnderConstruction from './pages/UnderConstruction'
 import { ThemeProvider } from './components/theme-provider'
 import VideoUpdate from './pages/VideoUpdate'
 import WatchHistory from './pages/WatchHistory'
+import ManageVideos from './pages/ManageVideos'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,6 +53,10 @@ const router = createBrowserRouter(
         <Route path='history' element={
         <ProtectedRoute>
           <WatchHistory />
+        </ProtectedRoute>} />
+        <Route path='manage-videos' element={
+        <ProtectedRoute>
+          <ManageVideos />
         </ProtectedRoute>} />
       <Route path="*" element={<UnderConstruction />} />
     </Route>

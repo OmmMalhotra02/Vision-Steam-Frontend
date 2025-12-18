@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 import {
-  Home, Youtube, Folder, Heart, Clock, User, Upload, Menu, X
+  Home, Youtube, Folder, Heart, Clock, User, Upload, CloudCog
 } from "lucide-react"
 
 export function AppSidebar() {
@@ -20,6 +20,7 @@ export function AppSidebar() {
       title: "User",
       items: [
         { title: "My Account", url: "/my-account", icon: <User size={18} /> },
+        { title: "Manage Videos", url: "/manage-videos", icon: <CloudCog size={18} /> },
         { title: "Upload Video", url: "/upload", icon: <Upload size={18} /> },
       ],
     },

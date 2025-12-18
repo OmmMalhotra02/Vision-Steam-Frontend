@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import {
     Avatar,
@@ -11,56 +11,44 @@ import {
     TabsTrigger,
     TabsContent,
 } from "@/components/ui/tabs"
-import { VideoCard } from "@/components/video-card"
 import apiClient from "@/api/apiClient"
 import { Button } from "@/components/ui/button"
-import { Eye, EyeOff, Pencil, Trash2 } from "lucide-react"
-import { Link } from "react-router-dom"
-import { toast } from "sonner"
+import { Video, Users, Eye, ThumbsUp, MessageSquare, Heart } from "lucide-react";
+
+type Stats = {
+    totalVideos: number,
+    totalSubscribers: number,
+    totalVideoLikes: number,
+    totalTweetLikes: number,
+    totalCommentLikes: number,
+    totalCommentsCount: number,
+    totalViews: number,
+}
+
+const initialStats = {
+    totalVideos: 0,
+    totalSubscribers: 0,
+    totalVideoLikes: 0,
+    totalTweetLikes: 0,
+    totalCommentLikes: 0,
+    totalCommentsCount: 0,
+    totalViews: 0
+}
 
 function MyAccount() {
     const userData = useSelector((state: any) => state.login.userData)
-    const [videos, setVideos] = useState([])
+    const [stats, setStats] = useState<Stats>(initialStats)
 
     useEffect(() => {
-        const handleVideos = async () => {
-            const res = await apiClient.get("/api/dashboard/videos")
-            setVideos(res.data.data)
+        const handleStats = async () => {
+            const res = await apiClient.get("/api/dashboard/stats")
+            setStats(res.data.data)
         }
-        handleVideos()
+        handleStats()
     }, [])
-
-    const togglePublish = async (id: string) => {
-        try {
-            const res = await apiClient.patch(`/api/videos/toggle/publish/${id}`)
-            setVideos((prevVideos) => {
-                return prevVideos.map((v) =>
-                    v._id === id ? { ...v, isPublished: !v.isPublished } : v
-                )
-            })
-            res.data.data.isPublished ? toast.success("Video published successfully") : toast.success("Video unpublished successfully")
-        } catch (error) {
-            console.error(error);
-            toast.error(error.response.data?.message)
-        }
-    }
-
-    const handleDelete = async (id: string) => {
-        try {
-            const res = await apiClient.delete(`/api/videos/${id}`)
-            res.data.data === "Video Deleted successfully" ? toast.success("Video deleted successfully") : null
-            setVideos(prevVideos => 
-                prevVideos.filter((v: any) => v._id !== id)
-            )
-        } catch (error) {
-            console.error(error);
-            toast.error(error.response.data?.message)
-        }
-    }
 
     return (
         <div className="min-h-screen text-black bg-gray-100 dark:bg-gray-950 dark:text-white">
-
             <div className="relative h-64 w-full overflow-hidden">
                 <img
                     src={userData.coverImage}
@@ -87,12 +75,99 @@ function MyAccount() {
                     </div>
                 </div>
 
+                <div className="grid grid-cols-2 gap-3 mt-5 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-indigo-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Total Videos
+                            </p>
+                            <Video className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                                {stats.totalVideos || 0}
+                            </h3>
+
+                        </h3>
+                    </div>
+
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-rose-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Subscribers
+                            </p>
+                            <Users className="h-4 w-4 sm:h-5 sm:w-5 text-rose-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            {stats?.totalSubscribers || 0}
+                        </h3>
+                    </div>
+
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-emerald-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Total Views
+                            </p>
+                            <Eye className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            {stats?.totalViews || 0}
+                        </h3>
+                    </div>
+
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-blue-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Video Likes
+                            </p>
+                            <ThumbsUp className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            {stats.totalVideoLikes || 0}
+                        </h3>
+                    </div>
+
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-purple-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Total Comment
+                            </p>
+                            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            {stats?.totalCommentsCount || 0}
+                        </h3>
+                    </div>
+
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-purple-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Comment Likes
+                            </p>
+                            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            {stats?.totalCommentLikes || 0}
+                        </h3>
+                    </div>
+
+                    <div className="rounded-xl border bg-card p-3 sm:p-4 transition-colors hover:border-pink-500/40">
+                        <div className="flex items-center justify-between">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
+                                Tweet Likes
+                            </p>
+                            <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-pink-500" />
+                        </div>
+                        <h3 className="mt-1 sm:mt-2 text-xl sm:text-2xl font-semibold">
+                            {stats?.totalTweetLikes || 0}
+                        </h3>
+                    </div>
+                </div>
+
+
                 <Tabs defaultValue="videos" className="mt-10 text-black bg-gray-100 dark:bg-gray-950 dark:text-white">
                     <TabsList className="flex justify-between w-full max-w-4xl mx-auto rounded-xl border border-gray-800 p-1 text-black bg-gray-100 dark:bg-gray-950 dark:text-white">
 
-                        <TabsTrigger value="videos" className="rounded-lg px-6 py-2 text-gray-400 data-[state=active]:bg-gray-800 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-indigo-500/60">
-                            Videos
-                        </TabsTrigger>
                         <TabsTrigger value="playlist" className="rounded-lg px-6 py-2 text-gray-400 data-[state=active]:bg-gray-800 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-indigo-500/60">
                             Playlists
                         </TabsTrigger>
@@ -104,47 +179,8 @@ function MyAccount() {
                         </TabsTrigger>
                     </TabsList>
 
-                    <TabsContent
-                        value="videos"
-                        className="mt-8 rounded-xl border text-black bg-gray-100 dark:bg-gray-950 dark:text-white border-gray-800 p-6 data-[state=active]:animate-in data-[state=active]:fade-in data-[state=active]:slide-in-from-bottom-2">
-                        {videos.length === 0 ? (
-                            <p className="text-gray-400">No videos uploaded yet</p>
-                        ) : (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                {videos.map((video: any) => (
-                                    <div key={video._id} className="relative group rounded-xl overflow-hidden">
-                                        <div className="absolute top-2 right-2 z-10 flex gap-1 rounded-lg backdrop-blur-md border border-black dark:border-white/10 p-1 text-black bg-gray-100 dark:bg-black/60 dark:text-white">
-                                            <button className="p-1.5 rounded-md hover:bg-white/10">
-                                                <Link to={`/video-edit/${video._id}`}>
-                                                    <Pencil size={16} />
-                                                </Link>
-                                            </button>
-                                            <button onClick={() => togglePublish(video._id)} className="p-1.5 rounded-md hover:bg-white/10">
-                                                {video.isPublished ? (
-                                                    <Eye size={16} className="text-green-500" />
-                                                ) : (
-                                                    <EyeOff size={16} className="text-red-500" />
-                                                )}
-                                            </button>
-                                            <button onClick={() => handleDelete(video._id)} className="p-1.5 rounded-md hover:bg-red-500/20 text-red-500">
-                                                <Trash2 size={16} />
-                                            </button>
-                                        </div>
-                                        <VideoCard
-                                            videoId={video._id}
-                                            thumbnail={video.thumbnail}
-                                            title={video.title}
-                                            views={video.views}
-                                            createdAt={video.createdAt}
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </TabsContent>
-
-                    <TabsContent value="playlist" className="mt-8">
-                        <Button className="mb-4">Create Playlist</Button>
+                    <TabsContent value="playlist" className="mt-8 rounded-xl border text-black bg-gray-100 dark:bg-gray-950 dark:text-white border-gray-800 p-6 data-[state=active]:animate-in data-[state=active]:fade-in data-[state=active]:slide-in-from-bottom-2">
+                        <Button className="mb-4 hover:bg-gray-800" variant="outline">Create Playlist</Button>
                         <p className="text-gray-400">No playlists yet</p>
                     </TabsContent>
 
@@ -160,6 +196,5 @@ function MyAccount() {
         </div >
     )
 }
-
 
 export default MyAccount
