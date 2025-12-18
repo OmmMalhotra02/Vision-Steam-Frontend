@@ -31,7 +31,7 @@ const VideoAsRow = ({ video }: Props) => {
 
             <div className="flex flex-col">
                 <h3 className="font-medium text-sm sm:text-base line-clamp-2">
-                    {video.likedVideosData.title}
+                    {video.title || video.likedVideosData.title}
                 </h3>
 
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -39,7 +39,7 @@ const VideoAsRow = ({ video }: Props) => {
                 </p>
 
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {video.likedVideosData.views} views • {new Date(video.likedVideosData.createdAt).toLocaleDateString()}
+                    {video.views || video.likedVideosData.views} views • {new Date(video.createdAt || video.likedVideosData.createdAt).toLocaleDateString()}
                 </p>
             </div>
         </div>
