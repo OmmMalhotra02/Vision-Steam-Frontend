@@ -19,6 +19,7 @@ import { ThemeProvider } from './components/theme-provider'
 import VideoUpdate from './pages/VideoUpdate'
 import WatchHistory from './pages/WatchHistory'
 import ManageVideos from './pages/ManageVideos'
+import LikedVideos from './pages/LikedVideos'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +58,10 @@ const router = createBrowserRouter(
         <Route path='manage-videos' element={
         <ProtectedRoute>
           <ManageVideos />
+        </ProtectedRoute>} />
+        <Route path='liked-videos' element={
+        <ProtectedRoute>
+          <LikedVideos />
         </ProtectedRoute>} />
       <Route path="*" element={<UnderConstruction />} />
     </Route>
