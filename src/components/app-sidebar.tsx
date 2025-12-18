@@ -12,7 +12,7 @@ export function AppSidebar() {
         { title: "Home", url: "/", icon: <Home size={18} /> },
         { title: "Subscriptions", url: "/subscriptions", icon: <Youtube size={18} /> },
         { title: "Playlists", url: "/playlists", icon: <Folder size={18} /> },
-        { title: "Liked Videos", url: "/likes", icon: <Heart size={18} /> },
+        { title: "Liked Videos", url: "/liked-videos", icon: <Heart size={18} /> },
         { title: "History", url: "/history", icon: <Clock size={18} /> },
       ],
     },
