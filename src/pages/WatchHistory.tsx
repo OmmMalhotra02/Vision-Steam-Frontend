@@ -5,7 +5,7 @@ import VideoAsRow from '@/components/VideoAsRow';
 
 function WatchHistory() {
 
-    const user: any = localStorage.getItem('userData')
+    const userData: any = JSON.parse(localStorage.getItem('userData'))
     const [watchHistory, setwatchHistory] = useState([])
 
     useEffect(() => {
@@ -20,7 +20,7 @@ function WatchHistory() {
             }
         }
         fetchHistory()
-    }, [user.id])
+    }, [userData._id])
 
     return (
         <div className="min-h-screen px-4 py-4 sm:px-6 sm:py-6 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">

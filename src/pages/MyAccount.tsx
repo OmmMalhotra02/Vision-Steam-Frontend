@@ -168,9 +168,6 @@ function MyAccount() {
                 <Tabs defaultValue="videos" className="mt-10 text-black bg-gray-100 dark:bg-gray-950 dark:text-white">
                     <TabsList className="flex justify-between w-full max-w-4xl mx-auto rounded-xl border border-gray-800 p-1 text-black bg-gray-100 dark:bg-gray-950 dark:text-white">
 
-                        <TabsTrigger value="playlist" className="rounded-lg px-6 py-2 text-gray-400 data-[state=active]:bg-gray-800 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-indigo-500/60">
-                            Playlists
-                        </TabsTrigger>
                         <TabsTrigger value="tweets" className="rounded-lg px-6 py-2 text-gray-400 data-[state=active]:bg-gray-800 data-[state=active]:text-white data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-indigo-500/60">
                             Tweets
                         </TabsTrigger>
@@ -178,11 +175,6 @@ function MyAccount() {
                             Subscribed
                         </TabsTrigger>
                     </TabsList>
-
-                    <TabsContent value="playlist" className="mt-8 rounded-xl border text-black bg-gray-100 dark:bg-gray-950 dark:text-white border-gray-800 p-6 data-[state=active]:animate-in data-[state=active]:fade-in data-[state=active]:slide-in-from-bottom-2">
-                        <Button className="mb-4 hover:bg-gray-800" variant="outline">Create Playlist</Button>
-                        <p className="text-gray-400">No playlists yet</p>
-                    </TabsContent>
 
                     <TabsContent value="tweets" className="mt-8">
                         <p className="text-gray-400">No tweets yet</p>

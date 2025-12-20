@@ -20,6 +20,10 @@ import VideoUpdate from './pages/VideoUpdate'
 import WatchHistory from './pages/WatchHistory'
 import ManageVideos from './pages/ManageVideos'
 import LikedVideos from './pages/LikedVideos'
+import ManagePlaylists from './pages/ManagePlaylists'
+import PlaylistDetails from './pages/AddVideosToPlaylist'
+import AllPlaylists from './pages/AllPlaylists'
+import AddVideosToPlaylist from './pages/AddVideosToPlaylist'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +66,18 @@ const router = createBrowserRouter(
         <Route path='liked-videos' element={
         <ProtectedRoute>
           <LikedVideos />
+        </ProtectedRoute>} />
+        <Route path='playlists/:playlistId' element={
+        <ProtectedRoute>
+          <AddVideosToPlaylist />
+        </ProtectedRoute>} />
+        <Route path='manage-playlists' element={
+        <ProtectedRoute>
+          <ManagePlaylists />
+        </ProtectedRoute>} />
+        <Route path='all-playlists' element={
+        <ProtectedRoute>
+          <AllPlaylists />
         </ProtectedRoute>} />
       <Route path="*" element={<UnderConstruction />} />
     </Route>

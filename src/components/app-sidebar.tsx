@@ -11,7 +11,7 @@ export function AppSidebar() {
       items: [
         { title: "Home", url: "/", icon: <Home size={18} /> },
         { title: "Subscriptions", url: "/subscriptions", icon: <Youtube size={18} /> },
-        { title: "Playlists", url: "/playlists", icon: <Folder size={18} /> },
+        { title: "Playlists", url: "/all-playlists", icon: <Folder size={18} /> },
         { title: "Liked Videos", url: "/liked-videos", icon: <Heart size={18} /> },
         { title: "History", url: "/history", icon: <Clock size={18} /> },
       ],
@@ -21,6 +21,7 @@ export function AppSidebar() {
       items: [
         { title: "My Account", url: "/my-account", icon: <User size={18} /> },
         { title: "Manage Videos", url: "/manage-videos", icon: <CloudCog size={18} /> },
+        { title: "Manage Playlists", url: "/manage-playlists", icon: <CloudCog size={18} /> },
         { title: "Upload Video", url: "/upload", icon: <Upload size={18} /> },
       ],
     },
