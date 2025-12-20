@@ -10,7 +10,7 @@ const VideoAsRow = ({ video }: Props) => {
     console.log();
 
     return (
-        <div onClick={() => navigate(`/video/${video._id || video.likedVideosData._id}`)} className="flex gap-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
+        <div onClick={() => navigate(`/video/${video._id || video.likedVideosData._id}`)} className="flex gap-4 p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition">
 
             <div className="relative w-48 h-28 shrink-0">
                 <img
@@ -35,7 +35,7 @@ const VideoAsRow = ({ video }: Props) => {
                 </h3>
 
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    {video?.ownerUser?.username || video?.likedVideosData.videoOwner.username}
+                    {video?.ownerUser?.username || video?.likedVideosData?.videoOwner.username}
                 </p>
 
                 <p className="text-sm text-gray-600 dark:text-gray-400">
